@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+    <link rel='stylesheet' href='static\styles\index.css'/>
+
+    <title>Home Page</title> 
+</head>
+
+
+<body> 
+    <div class='header'>
+        <h1> Sales Prediction </h1>
+        <p> welcome to our application where you can predict the sales of different types of markets</p>
+    </div>
+
+    <div> 
+        <form action="/predict" method="POST">
+            <label for="weight">Product Weight</label><br>
+            <input type='number' step="0.1" id='weight' name='weight'><br><br>
+            
+            <label for='fat'>Fat</label><br>
+            <select id='Item_Fat_Content' name='Item_Fat_Content'>
+                <option value= > </option>
+                <option value=' '></option>
+                <option value='regular'>regular</option>
+                <option value='low fat'>low fat</option>
+            </select><br><br>
+
+            <label for='product'>Product</label><br>
+            <select id='product' name='product'>
+                <option value= > </option>
+                <option value='baking goods'>baking goods</option>
+                <option value='breads'>breads</option>
+                <option value='breakfast'>breakfast</option>
+                <option value='canned'>canned</option>
+                <option value='Dairy'>Dairy</option>
+                <option value='frozen food'>frozen food</option>
+                <option value='fruits and vegetables'>fruits and vegetables</option>
+                <option value='hard drinks'>hard drinks</option>
+                <option value='health and hygiene'>health and hygiene</option>
+                <option value='household'>household</option>
+                <option value='meat'>meat</option>
+                <option value='others'>others</option>
+                <option value='seafood'>seafood</option>
+                <option value='snak Foods'>snak Foods</option>
+                <option value='soft drinks'>soft drinks</option>
+                <option value='starchy foods'>starchy foods</option>
+            </select><br><br>
+                
+            <label for="price">price</label><br>
+                <input type='number' step="0.1" id='Item_MRP' name='Item_MRP'><br><br>
+        
+            <label for='size'>Market Size</label><br>
+            <select id='Outlet_Size' name='Outlet_Size'>
+                <option value= > </option>
+                <option value='small'>small</option>
+                <option value='medium'>medium</option>
+                <option value='large'>large</option>
+            </select><br><br>
+
+            <label for="population">Population</label><br>
+            <select id="Outlet_Location_Type" name="Outlet_Location_Type">
+            <option value=" "> </option>
+            <option value="tier 1'">tier 1'</option>
+            <option value="tier 2'">tier 2'</option>
+            <option value="tier 3'">tier 3'</option>
+            </select><br><br>
+
+            <label for="market">Market Type</label><br>
+            <select id="Outlet_Type" name="Outlet_Type">
+            <option value="supermarket type1">Supermarket Type1</option>
+            <option value="supermarket type2">Supermarket Type1</option>
+            <option value="supermarket type3">Supermarket Type1</option>
+            <option value="grocery store">Grocery Store</option>
+            </select><br><br>
+
+            
+
+            <input type="Submit" value="Predict"/>
+        </form>
+        
+    </div>
+
+
+</body>
