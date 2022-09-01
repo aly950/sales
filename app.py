@@ -15,16 +15,16 @@ def index() :
 @app.route('/predict', methods = ['POST', 'GET']) 
 def get_prediction() :
     if request.method == 'POST' :
-        Item_Weight = request.form['Item Weight']
-        Item_Fat_Content = request.form['Fat']
-        Item_Type = request.form['Item Type']
+        Item_Weight = request.form['weight']
+        Item_Fat_Content = request.form['fat']
+        Item_Type = request.form['product']
         Item_MRP = request.form['price']
-        Outlet_Size = request.form['Size']
-        Outlet_Location_Type = request.form['Location Tier']
-        Outlet_Type = request.form['Market type']
+        Outlet_Size = request.form['size']
+        Outlet_Location_Type = request.form['population']
+        Outlet_Type = request.form['market']
         
-    data = {'Item_Weight' : Item_Weight, 'Item_Fat_Content' : Item_Fat_Content, 'Item_Type' : Item_Type, 
-            'Item_MRP' : Item_MRP, 'Outlet_Size' : Outlet_Size, 'Outlet_Location_Type' : Outlet_Location_Type, 'Outlet_Type' : Outlet_Type}
+    data = {'weight' : Item_Weight, 'fat' : Item_Fat_Content, 'product' : Item_Type, 
+            'price' : Item_MRP, 'size' : Outlet_Size, 'population' : Outlet_Location_Type, 'market' : Outlet_Type}
     
     final_data = preprocess.preprocess_data(data)
     scaled_data = scaler.transform([final_data])

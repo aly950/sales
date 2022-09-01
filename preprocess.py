@@ -28,11 +28,11 @@ def product_type(product):
         return 11
     if product.lower().strip()=='seafood':
         return 12
-    if product.lower().strip()=='snak Food':
+    if product.lower().strip()=='snak Foods':
         return 13
     if product.lower().strip()=='soft drinks':
         return 14
-    if product.lower().strip()=='strachy food':
+    if product.lower().strip()=='starchy foods':
         return 15
 
 
@@ -53,11 +53,11 @@ def population(population):
         return 2
 
 def market_type(market):
-    if market.lower().strip()=='Supermarket Type1':
+    if market.lower().strip()=='supermarket type1':
         return 1
-    if market.lower().strip()=='Supermarket Type2':
+    if market.lower().strip()=='supermarket type2':
         return 2
-    if market.lower().strip()=='Supermarket Type3':
+    if market.lower().strip()=='supermarket type3':
         return 3
     else:
         return 0
