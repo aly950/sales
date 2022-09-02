@@ -1,3 +1,4 @@
+import numpy as np
 def item_fat(fat):
     return 0 if fat.lower().strip()=='low fat' else 1
 
@@ -62,21 +63,21 @@ def market_type(market):
     else:
         return 0
 
-    def preprocess(data):
-        Item_Weight = data['weight']
+def preprocess_data(data):
+    Item_Weight = data['weight']
     
-        Item_Fat_Content=item_fat(data['fat'])
+    Item_Fat_Content=item_fat(data['fat'])
     
-        Item_Type=product_type(data['product'])
+    Item_Type=product_type(data['product'])
     
-        Item_MRP=data['price']
+    Item_MRP=data['price']
     
-        Outlet_Size =size(data['size'])
+    Outlet_Size =size(data['size'])
     
-        Outlet_Location_Type= population(data['population'])
+    Outlet_Location_Type= population(data['population'])
     
-        Outlet_Type=market_type(data['market'])
+    Outlet_Type=market_type(data['market'])
     
-        final_data = [Item_Weight,Item_Fat_Content,Item_Type,Item_MRP,Outlet_Size,Outlet_Location_Type,Outlet_Type]
+    final_data = [[Item_Weight,Item_MRP,Item_Fat_Content,Item_Type,Outlet_Size,Outlet_Location_Type,Outlet_Type]]
     
-        return final_data
+    return (final_data)
