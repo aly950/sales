@@ -1,83 +1,75 @@
-import numpy as np
-def item_fat(fat):
-    return 0 if fat.lower().strip()=='low fat' else 1
-
-def product_type(product):
-    if product.lower().strip()=='baiking goods':
-        return 0
-    if product.lower().strip()=='breads':
-        return 1
-    if product.lower().strip()=='breakfast':
-        return 2
-    if product.lower().strip()=='canned':
-        return 3
-    if product.lower().strip()=='Dairy':
-        return 4
-    if product.lower().strip()=='frozen food':
-        return 5
-    if product.lower().strip()=='fruits and vegetables':
-        return 6
-    if product.lower().strip()=='hard drinks':
-        return 7
-    if product.lower().strip()=='health and hygiene':
-        return 8
-    if product.lower().strip()=='household':
-        return 9
-    if product.lower().strip()=='meat':
-        return 10
-    if product.lower().strip()=='others':
-        return 11
-    if product.lower().strip()=='seafood':
-        return 12
-    if product.lower().strip()=='snak Foods':
-        return 13
-    if product.lower().strip()=='soft drinks':
-        return 14
-    if product.lower().strip()=='starchy foods':
-        return 15
+def is_rush_hour(hour):
+    return 1 if hour in [5, 6, 7, 12, 13, 14, 15] else 0
 
 
-def size(size):
-    if size.lower().strip()=='small':
-        return 2
-    if size.lower().strip()=='medium':
-        return 1
+def extract_period_of_day(hour):
+    if hour in range(12):
+        return [0,1,0]
+    elif hour in range(12, 18):
+        return [0,0,0]
+    elif hour in range(18, 22):
+        return [1,0,0]
     else:
-        return 0
+        return [0,0,1]
 
-def population(population):
-    if population.lower().strip()=='tier 1':
-        return 0
-    if population.lower().strip()=='tier 2':
-        return 1
-    else:
-        return 2
+def preprocess_season(season) :
+    if season.lower() == 'summer' : 
+        return [0, 1, 0]
+    elif season.lower() == 'winter' :
+        return [0, 0, 1]
+    elif season.lower() == 'spring' :
+        return [1, 0, 0]
+    else :
+        return [0,0,0]
+    
+def preprocess_weather(weather) :
+    if weather.lower() == 'mist' : 
+        return [1, 0, 0]
+    elif weather.lower() == 'rainy' :
+        return [0, 1, 0]
+    elif weather.lower() == 'snowy' :
+        return [0, 0, 1]
+    else :
+        return [0,0,0]
 
-def market_type(market):
-    if market.lower().strip()=='supermarket type1':
-        return 1
-    if market.lower().strip()=='supermarket type2':
-        return 2
-    if market.lower().strip()=='supermarket type3':
-        return 3
-    else:
-        return 0
-
-def preprocess_data(data):
-    Item_Weight = data['weight']
+def weakday_name(day) :
+    if day.lower() == 'monday' :
+        return [1,0,0,0,0,0]
+    elif day.lower() == 'saturday' :
+        return [0,1,0,0,0,0]
+    elif day.lower() == 'sunday' :
+        return [0,0,1,0,0,0]
+    elif day.lower() == 'thursday' :
+        return [0,0,0,1,0,0]
+    elif day.lower() == 'tuesday' :
+        return [0,0,0,0,1,0]
+    elif day.lower() == 'wednesday' :
+        return [0,0,0,0,0,1]
+    else :
+        return [0,0,0,0,0,0]
     
-    Item_Fat_Content=item_fat(data['fat'])
     
-    Item_Type=product_type(data['product'])
     
-    Item_MRP=data['price']
+## data is du=ictionary contains all input from the user
+def preprocess_data(data) :
+    temp = data['temperature']
     
-    Outlet_Size =size(data['size'])
+    humidity = data['humidity']
     
-    Outlet_Location_Type= population(data['population'])
+    hour = data['hour']
     
-    Outlet_Type=market_type(data['market'])
+    rush_hour = is_rush_hour(data['hour'])    
     
-    final_data = [[Item_Weight,Item_MRP,Item_Fat_Content,Item_Type,Outlet_Size,Outlet_Location_Type,Outlet_Type]]
+    month = data['month']
     
-    return (final_data)
+    season_features = preprocess_season(data['season'])
+    
+    weather_features = preprocess_weather(data['weather'])
+    
+    day_name_features = weakday_name(data['day'])
+    
+    period_of_day = extract_period_of_day(data['hour'])
+    
+    final_data = [temp, humidity, hour, rush_hour, month] + season_features + weather_features + day_name_features + period_of_day
+    
+    return final_data
