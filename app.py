@@ -6,7 +6,7 @@ import numpy as np
 app = Flask(__name__)
 
 scaler = joblib.load('Models/scaler.h5')
-model = joblib.load('Models/model.h5')
+model = joblib.load('Models/RF.h5')
 
 
 @app.route('/')
@@ -16,27 +16,28 @@ def index() :
 @app.route('/predict', methods = ['POST', 'GET']) 
 def get_prediction() :
     if request.method == 'POST' :
-        temp = request.form['temp']
-        humidity = request.form['Humidity']
-        hour = request.form['hour']
-        month = request.form['month']
-        season = request.form['season']
-        weather = request.form['weather']
-        day = request.form['day']
+        weight = request.form['weight']
+        fat = request.form['fat']
+        product = request.form['product']
+        price = request.form['price']
+        size = request.form['size']
+        population = request.form['population']
+        market = request.form['market']
         
-    data = {'temperature' : temp, 'humidity' : humidity, 'hour' : hour, 
-            'month' : month, 'season' : season, 'weather' : weather, 'day' : day}
+    data = {'weight' : weight, 'fat' : fat, 'product' : product, 
+            'price' : price, 'size' : size, 'population' : population, 'market' : market}
     
     final_data = preprocess.preprocess_data(data)
     scaled_data = scaler.transform([final_data])
-    scaled_data = scaled_data[0][:10]
+    #scaled_data = scaled_data[0][:8]
     prediction = int(model.predict(scaled_data)[0])
     
     # return str(round(prediction))
-    return render_template('prediction.html', bikes_count = str(prediction))
+    return render_template('prediction.html', sales = str(prediction))
         
         
 
 if __name__ == '__main__' :
     app.run(debug = True)
+   
     
